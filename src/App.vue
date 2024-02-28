@@ -15,7 +15,21 @@
 
 import Header from './components/Header.vue';
 import TodayWeather from './components/TodayWeather.vue';
+
+import axios from 'axios';
 import { ref, onMounted } from 'vue';
+
+const city = ref('');
+const cityWeather = ref([]);
+
+const getWeather = async () => {
+  let res = await axios.get('https://api.openweathermap.org/data/2.5/forecast?q=`${city}`&units=metric&appid=9dd86907fe501cec50da3d087e4e9dc0')
+  cityWeather.value = [...res.data]
+}
+
+onMounted(() => {
+  getWeather()
+})
 
 </script>
 
