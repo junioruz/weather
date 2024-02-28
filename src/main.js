@@ -1,4 +1,4 @@
-import './components/styles/style/main.sass'
+// import './components/styles/style/main.sass';
 
 import { createApp } from 'vue'
 import App from './App.vue'

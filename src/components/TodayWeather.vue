@@ -15,41 +15,8 @@
             <div class="weather__citys">
                 <p>Hududlar</p>
                 <ul class="citys__lists">
-                    <li class="city__list">
-                        Toshkent shahri
-                    </li>
-                    <li class="city__list">
-                        Andijon
-                    </li>
-                    <li class="city__list">
-                        Namangan
-                    </li>
-                    <li class="city__list">
-                        Farg'ona
-                    </li>
-                    <li class="city__list">
-                        Sirdaryo
-                    </li>
-                    <li class="city__list">
-                        Surxondaryo
-                    </li>
-                    <li class="city__list">
-                        Qashqadaryo
-                    </li>
-                    <li class="city__list">
-                        Xorazm
-                    </li>
-                    <li class="city__list">
-                        Navoiy
-                    </li>
-                    <li class="city__list">
-                        Buxoro
-                    </li>
-                    <li class="city__list">
-                        Qoraqalpog'iston
-                    </li>
-                    <li class="city__list">
-                        Toshkent vil
+                    <li @click="cityClick(city)" class="city__list" v-for="city of cityArr">
+                        {{ city }}
                     </li>
                 </ul>
             </div>
@@ -118,6 +85,49 @@
         </div>
     </div>
 </template>
+
+<script setup>
+
+import { ref, defineEmits } from 'vue';
+
+const emit = defineEmits(['cityClickName'])
+
+const cityArr = ref([
+    'Toshkent shahar',
+    'Andijon',
+    'Namangan',
+    'Farg`ona',
+    'Sirdaryo',
+    'Surxondaryo',
+    'Qashqadaryo',
+    'Xorazm',
+    'Navoiy',
+    'Buxoro',
+    'Qoraqalpog`iston'
+])
+
+// key-value map
+
+let myMap = new Map();
+
+myMap.set('Toshkent shahar', 'Tashkent');
+myMap.set('Andijon', 'Andijan');
+myMap.set('Namangan', 'Namangan');
+myMap.set('Farg`ona', 'Fergana');
+myMap.set('Sirdaryo', 'Fergana');
+myMap.set('Surxondaryo', 'Surkhandarya');
+myMap.set('Qashqadaryo', 'Kashkadarya');
+myMap.set('Xorazm', 'Khorezm');
+myMap.set('Navoiy', 'Navoi');
+myMap.set('Buxoro', 'Bukhara');
+myMap.set('Qoraqalpog`iston', 'Karakalpakstan');
+
+const cityClick = (cityKey) => {
+    let qiymat = myMap.get(`${cityKey}`);
+    emit('cityClickName', qiymat);
+}
+
+</script>
 
 <style lang="scss">
 .weather {
